@@ -92,7 +92,7 @@ class Baker(object):
         logger.error("{}: Filling directory does not exist".format(filling_name))
         sys.exit()
 
-    with open('pi-gen-config','w+') as config_file:
+    with open('/opt/config/pi-gen-config','w+') as config_file:
       for key in self.json_data:
         if(key != 'fillings' and key != 'skip_stage' and key != 'skip_image' and key != 'skip_noobs' and self.json_data[key] != ""):
           if(isinstance(self.json_data[key],int)):
@@ -107,7 +107,7 @@ class Baker(object):
     if not os.path.exists(self.deploy_path):
       os.mkdir(self.deploy_path)
     os.chdir('pi-gen')
-    cmd = 'sudo ./build-docker.sh -c ../pi-gen-config'
+    cmd = 'sudo ./build-docker.sh -c ../opt/config/pi-gen-config'
     process = subprocess.Popen(shlex.split(cmd),stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
     for line in iter(process.stdout.readline, b''):
       logger.warning(line.decode().rstrip())
