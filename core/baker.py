@@ -107,7 +107,7 @@ class Baker(object):
     if not os.path.exists(self.deploy_path):
       os.mkdir(self.deploy_path)
     os.chdir('pi-gen')
-    cmd = 'sudo ./build.sh -c ../pi-gen-config'
+    cmd = 'sudo ./build-docker.sh -c ../pi-gen-config'
     process = subprocess.Popen(shlex.split(cmd),stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
     for line in iter(process.stdout.readline, b''):
       logger.warning(line.decode().rstrip())
